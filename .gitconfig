@@ -1,0 +1,27 @@
+[user]
+	name = Gabriel Lundmark
+	email = g.lundmark@gmail.com
+[core]
+	#editor = nano
+    editor = code --wait
+     # Make `git rebase` safer on macOS
+    # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+    trustctime = false
+
+[alias]
+    st = status
+    ci = commit
+    co = checkout
+    br = branch
+    fb = checkout -b
+    glog = log --graph --all --oneline --decorate
+    start = !git init && git commit --allow-empty -m \"Initial commit\"
+
+[push]
+    default = simple
+    followTags = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
