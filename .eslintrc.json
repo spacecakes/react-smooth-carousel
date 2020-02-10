@@ -1,0 +1,7 @@
+{
+  "extends": ["@weahead/eslint-config-react"],
+  "rules": {
+    "react/no-array-index-key": "off",
+    "jsx-a11y/no-noninteractive-tabindex": "off"
+  }
+}

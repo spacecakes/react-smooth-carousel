@@ -1,12 +1,12 @@
 /** @jsx jsx */
-import { bool, node, string, number } from "prop-types";
-import { Children, useEffect, useState, useCallback } from "react";
-import { jsx } from "theme-ui";
+import { bool, node, number, string } from 'prop-types';
+import { Children, useCallback, useEffect, useState } from 'react';
+import { jsx } from 'theme-ui';
 
-import CarouselSlide from "./CarouselSlide";
-import CarouselView from "./CarouselView";
-import CarouselButton from "./CarouselButton";
-import CarouselDots from "./CarouselDots";
+import CarouselButton from './CarouselButton';
+import CarouselDots from './CarouselDots';
+import CarouselSlide from './CarouselSlide';
+import CarouselView from './CarouselView';
 
 const Carousel = ({
   slidesVisible,
@@ -15,7 +15,7 @@ const Carousel = ({
   initialSlide,
   children,
   loopAround,
-  smooth
+  smooth,
 }) => {
   const [currentSlide, setCurrentSlide] = useState(initialSlide);
 
@@ -41,9 +41,9 @@ const Carousel = ({
   const scrollTo = useCallback(
     slideIndex => {
       const scrollOptions = {
-        behavior: smooth ? "smooth" : "auto",
-        block: "center",
-        inline: "center"
+        behavior: smooth ? 'smooth' : 'auto',
+        block: 'center',
+        inline: 'center',
       };
 
       document
@@ -64,8 +64,8 @@ const Carousel = ({
   return (
     <div
       sx={{
-        size: "100%",
-        display: "grid",
+        size: '100%',
+        display: 'grid',
         gridTemplate: vertical
           ? `
             "prev . dots"
@@ -76,7 +76,7 @@ const Carousel = ({
             "prev .... next" 1fr
             "prev dots next" auto
             / auto 1fr auto
-          `
+          `,
       }}
     >
       <CarouselView
@@ -85,7 +85,7 @@ const Carousel = ({
         vertical={vertical}
       >
         {Children.map(children, (child, index) => (
-          <CarouselSlide updateUI={updateUI} key={index} slideIndex={index}>
+          <CarouselSlide key={index} slideIndex={index} updateUI={updateUI}>
             {child}
           </CarouselSlide>
         ))}
@@ -117,10 +117,10 @@ const Carousel = ({
 Carousel.defaultProps = {
   initialSlide: 1,
   loopAround: false,
-  slideGap: "0",
+  slideGap: '0',
   slidesVisible: 1, // Not yet implemented. Don't change.
   smooth: true,
-  vertical: false
+  vertical: false,
 };
 
 Carousel.propTypes = {
@@ -130,7 +130,7 @@ Carousel.propTypes = {
   slideGap: string,
   slidesVisible: number,
   smooth: bool,
-  vertical: bool
+  vertical: bool,
 };
 
 export default Carousel;
