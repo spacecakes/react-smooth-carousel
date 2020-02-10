@@ -3,20 +3,33 @@ import { bool, node, number } from 'prop-types';
 import { jsx } from 'theme-ui';
 
 const CarouselView = ({ children, vertical, slidesVisible, slideGap }) => {
+  const horizontalStyle = {
+    gridAutoFlow: 'column',
+    gridAutoColumns: `${100 / slidesVisible}%`,
+    gridAutoRows: '100%',
+    overflowY: 'hidden',
+    overflowX: 'auto',
+    scrollSnapType: 'x mandatory',
+  };
+
+  const verticalStyle = {
+    gridAutoFlow: 'row',
+    gridAutoColumns: '100%',
+    gridAutoRows: `${100 / slidesVisible}%`,
+    overflowY: 'auto',
+    overflowX: 'hidden',
+    scrollSnapType: 'y mandatory',
+  };
+
   return (
     <div
       sx={{
+        ...(vertical ? verticalStyle : horizontalStyle),
+        display: 'grid',
         gridArea: '1 / 1 / -1 / -1',
         gridGap: slideGap,
-        display: 'grid',
-        gridAutoFlow: vertical ? 'row' : 'column',
-        gridAutoColumns: vertical ? '100%' : `${100 / slidesVisible}%`,
-        gridAutoRows: vertical ? `${100 / slidesVisible}%` : '100%',
         size: '100%',
         outline: 'none',
-        overflowY: vertical ? 'auto' : 'hidden',
-        overflowX: vertical ? 'hidden' : 'auto',
-        scrollSnapType: `${vertical ? 'y' : 'x'} mandatory`,
         scrollbarWidth: 'none', // Hide scrollbar on Firefox
         '-webkit-overflow-scrolling': 'touch', // Needed to work on iOS Safari
         '::-webkit-scrollbar': { display: 'none' }, // Hide scrollbar on Chrome & Safari
