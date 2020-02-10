@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import { func, node, number } from 'prop-types';
+import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { jsx } from 'theme-ui';
 
@@ -8,13 +9,11 @@ const CarouselSlide = ({ slideIndex, updateUI, children }) => {
     threshold: 0.6,
   });
 
-  if (inView) {
-    setTimeout(() => {
+  useEffect(() => {
+    if (inView) {
       updateUI(slideIndex);
-    }, 0);
-    /*  Todo: fix this properly without timer. Without it, this triggers last and resets state to previous slide.
-    Behavior smooth fixes this but isn't supported in Safari. */
-  }
+    }
+  }, [inView, slideIndex, updateUI]);
 
   return (
     <div
