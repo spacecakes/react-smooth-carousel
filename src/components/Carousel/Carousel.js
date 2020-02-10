@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { bool, node, number, string } from 'prop-types';
+import { node, number, object } from 'prop-types';
 import { Children, useCallback, useEffect, useState } from 'react';
 import { jsx } from 'theme-ui';
 
@@ -9,26 +9,21 @@ import CarouselSlide from './CarouselSlide';
 import CarouselView from './CarouselView';
 
 const Carousel = ({
-  slidesVisible,
-  vertical,
-  slideGap,
   initialSlide,
   children,
-  loopAround,
-  smooth,
+  options = { loop: false, slideGap: null, slidesVisible: 1, smooth: true },
 }) => {
   const [currentSlide, setCurrentSlide] = useState(initialSlide);
-
   const slideIndexes = Children.map(children, (child, index) => index);
 
   const handleClick = slideIndex => {
     /* Restart from end or beginning if index out of bounds */
     if (slideIndex > slideIndexes.length - 1) {
-      if (loopAround) {
+      if (options.loop) {
         slideIndex = 0;
       }
     } else if (slideIndex < 0) {
-      if (loopAround) {
+      if (options.loop) {
         slideIndex = slideIndexes.length - 1;
       }
     }
@@ -41,7 +36,7 @@ const Carousel = ({
   const scrollTo = useCallback(
     slideIndex => {
       const scrollOptions = {
-        behavior: smooth ? 'smooth' : 'auto',
+        behavior: options.smooth ? 'smooth' : 'auto',
         block: 'center',
         inline: 'center',
       };
@@ -50,7 +45,7 @@ const Carousel = ({
         .getElementById(`slide-${slideIndex}`)
         .scrollIntoView(scrollOptions);
     },
-    [smooth]
+    [options.smooth]
   );
 
   const updateUI = index => {
@@ -66,7 +61,7 @@ const Carousel = ({
       sx={{
         size: '100%',
         display: 'grid',
-        gridTemplate: vertical
+        gridTemplate: options.vertical
           ? `
             "prev . dots"
             "next . dots"
@@ -80,9 +75,9 @@ const Carousel = ({
       }}
     >
       <CarouselView
-        slideGap={slideGap}
-        slidesVisible={slidesVisible}
-        vertical={vertical}
+        slideGap={options.slideGap}
+        slidesVisible={options.slidesVisible}
+        vertical={options.vertical}
       >
         {Children.map(children, (child, index) => (
           <CarouselSlide key={index} slideIndex={index} updateUI={updateUI}>
@@ -92,23 +87,23 @@ const Carousel = ({
       </CarouselView>
 
       <CarouselButton
-        disabled={currentSlide === 0 && !loopAround}
+        disabled={currentSlide === 0 && !options.loop}
         handleClick={prevSlide}
         prev
-        vertical={vertical}
+        vertical={options.vertical}
       />
 
       <CarouselDots
         currentSlide={currentSlide}
         handleClick={handleClick}
         slideIndexes={slideIndexes}
-        vertical={vertical}
+        vertical={options.vertical}
       />
 
       <CarouselButton
-        disabled={currentSlide === slideIndexes.length - 1 && !loopAround}
+        disabled={currentSlide === slideIndexes.length - 1 && !options.loop}
         handleClick={nextSlide}
-        vertical={vertical}
+        vertical={options.vertical}
       />
     </div>
   );
@@ -116,21 +111,13 @@ const Carousel = ({
 
 Carousel.defaultProps = {
   initialSlide: 1,
-  loopAround: false,
-  slideGap: '0',
-  slidesVisible: 1, // Not yet implemented. Don't change.
-  smooth: true,
-  vertical: false,
+  options: {},
 };
 
 Carousel.propTypes = {
   children: node.isRequired,
   initialSlide: number,
-  loopAround: bool,
-  slideGap: string,
-  slidesVisible: number,
-  smooth: bool,
-  vertical: bool,
+  options: object,
 };
 
 export default Carousel;

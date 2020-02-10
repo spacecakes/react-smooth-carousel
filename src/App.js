@@ -6,21 +6,19 @@ import Carousel from './components/Carousel';
 import slides from './slides.json';
 
 function App() {
-  const [vertical, setVertical] = useState(false);
-  const [loop, setLoop] = useState(false);
-  const [smooth, setSmooth] = useState(true);
-  const [slideGap, setSlideGap] = useState(0);
+  const [options, setOptions] = useState({
+    loop: false,
+    slideGap: '0px',
+    slidesVisible: 1,
+    smooth: true,
+    vertical: false,
+  });
+
   const [initialSlide, setInitialSlide] = useState(0);
 
   return (
     <div style={{ minHeight: 400, height: '40vw', maxHeight: 700 }}>
-      <Carousel
-        initialSlide={initialSlide}
-        loopAround={loop}
-        slideGap={slideGap}
-        smooth={smooth}
-        vertical={vertical}
-      >
+      <Carousel initialSlide={initialSlide} options={options}>
         {slides.map(slide => (
           <img
             alt={slide.alt}
@@ -42,24 +40,50 @@ function App() {
         <p>Swipe me!</p>
 
         <h2 sx={{ fontSize: 2 }}>Props</h2>
-        <button onClick={() => setVertical(val => !val)}>
-          {vertical ? 'Horizontal' : 'Vertical'}
+        <button
+          onClick={() =>
+            setOptions({
+              ...options,
+              vertical: !options.vertical,
+            })
+          }
+        >
+          {options.vertical ? 'Horizontal' : 'Vertical'}
         </button>
-        <button onClick={() => setLoop(val => !val)}>
-          {loop ? "Don't loop" : 'Loop'}
+        <button
+          onClick={() =>
+            setOptions({
+              ...options,
+              loop: !options.loop,
+            })
+          }
+        >
+          {options.loop ? "Don't loop" : 'Loop'}
         </button>
-        <button onClick={() => setSmooth(val => !val)}>
-          {smooth ? 'Instant transition' : 'Smooth transition'}
+        <button
+          onClick={() =>
+            setOptions({
+              ...options,
+              smooth: !options.smooth,
+            })
+          }
+        >
+          {options.smooth ? 'Instant transition' : 'Smooth transition'}
         </button>
 
         <br />
 
         <label sx={{ display: 'flex', marginY: 2 }}>
           <input
-            onChange={e => setSlideGap(e.currentTarget.value)}
+            onChange={e =>
+              setOptions({
+                ...options,
+                slideGap: e.currentTarget.value,
+              })
+            }
             sx={{ marginRight: 2 }}
             type="text"
-            value={slideGap}
+            value={options.slideGap}
           />
           gap (%, px)
         </label>
