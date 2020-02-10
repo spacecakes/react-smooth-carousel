@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { node, number, object } from 'prop-types';
-import { Children, useCallback, useEffect, useState } from 'react';
+import { Children, Fragment, useCallback, useEffect, useState } from 'react';
 import { jsx } from 'theme-ui';
 
 import CarouselButton from './CarouselButton';
@@ -8,11 +8,7 @@ import CarouselDots from './CarouselDots';
 import CarouselSlide from './CarouselSlide';
 import CarouselView from './CarouselView';
 
-const Carousel = ({
-  initialSlide,
-  children,
-  options = { loop: false, slideGap: null, slidesVisible: 1, smooth: true },
-}) => {
+const Carousel = ({ initialSlide, children, options }) => {
   const [currentSlide, setCurrentSlide] = useState(initialSlide);
   const slideIndexes = Children.map(children, (child, index) => index);
 
@@ -32,6 +28,9 @@ const Carousel = ({
 
   const nextSlide = () => handleClick(currentSlide + 1);
   const prevSlide = () => handleClick(currentSlide - 1);
+
+  const isLast = currentSlide === slideIndexes.length - 1 && !options.loop;
+  const isFirst = currentSlide === 0 && !options.loop;
 
   const scrollTo = useCallback(
     slideIndex => {
@@ -74,11 +73,7 @@ const Carousel = ({
           `,
       }}
     >
-      <CarouselView
-        slideGap={options.slideGap}
-        slidesVisible={options.slidesVisible}
-        vertical={options.vertical}
-      >
+      <CarouselView options={options}>
         {Children.map(children, (child, index) => (
           <CarouselSlide key={index} slideIndex={index} updateUI={updateUI}>
             {child}
@@ -86,32 +81,44 @@ const Carousel = ({
         ))}
       </CarouselView>
 
-      <CarouselButton
-        disabled={currentSlide === 0 && !options.loop}
-        handleClick={prevSlide}
-        prev
-        vertical={options.vertical}
-      />
+      {options.dots ? (
+        <CarouselDots
+          currentSlide={currentSlide}
+          handleClick={handleClick}
+          slideIndexes={slideIndexes}
+          vertical={options.vertical}
+        />
+      ) : null}
 
-      <CarouselDots
-        currentSlide={currentSlide}
-        handleClick={handleClick}
-        slideIndexes={slideIndexes}
-        vertical={options.vertical}
-      />
-
-      <CarouselButton
-        disabled={currentSlide === slideIndexes.length - 1 && !options.loop}
-        handleClick={nextSlide}
-        vertical={options.vertical}
-      />
+      {options.arrows ? (
+        <Fragment>
+          <CarouselButton
+            disabled={isFirst}
+            handleClick={prevSlide}
+            prev
+            vertical={options.vertical}
+          />
+          <CarouselButton
+            disabled={isLast}
+            handleClick={nextSlide}
+            vertical={options.vertical}
+          />
+        </Fragment>
+      ) : null}
     </div>
   );
 };
 
 Carousel.defaultProps = {
   initialSlide: 1,
-  options: {},
+  options: {
+    loop: false,
+    slideGap: null,
+    slidesVisible: 1,
+    smooth: true,
+    dots: true,
+    arrows: true,
+  },
 };
 
 Carousel.propTypes = {

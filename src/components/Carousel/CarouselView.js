@@ -1,11 +1,11 @@
 /** @jsx jsx */
-import { bool, node, number } from 'prop-types';
+import { node, object } from 'prop-types';
 import { jsx } from 'theme-ui';
 
-const CarouselView = ({ children, vertical, slidesVisible, slideGap }) => {
+const CarouselView = ({ children, options }) => {
   const horizontalStyle = {
     gridAutoFlow: 'column',
-    gridAutoColumns: `${100 / slidesVisible}%`,
+    gridAutoColumns: `${100 / options.slidesVisible}%`,
     gridAutoRows: '100%',
     overflowY: 'hidden',
     overflowX: 'auto',
@@ -15,7 +15,7 @@ const CarouselView = ({ children, vertical, slidesVisible, slideGap }) => {
   const verticalStyle = {
     gridAutoFlow: 'row',
     gridAutoColumns: '100%',
-    gridAutoRows: `${100 / slidesVisible}%`,
+    gridAutoRows: `${100 / options.slidesVisible}%`,
     overflowY: 'auto',
     overflowX: 'hidden',
     scrollSnapType: 'y mandatory',
@@ -24,10 +24,10 @@ const CarouselView = ({ children, vertical, slidesVisible, slideGap }) => {
   return (
     <div
       sx={{
-        ...(vertical ? verticalStyle : horizontalStyle),
+        ...(options.vertical ? verticalStyle : horizontalStyle),
         display: 'grid',
         gridArea: '1 / 1 / -1 / -1',
-        gridGap: slideGap,
+        gridGap: options.slideGap,
         size: '100%',
         outline: 'none',
         scrollbarWidth: 'none', // Hide scrollbar on Firefox
@@ -43,9 +43,7 @@ const CarouselView = ({ children, vertical, slidesVisible, slideGap }) => {
 
 CarouselView.propTypes = {
   children: node.isRequired,
-  slideGap: number.isRequired,
-  slidesVisible: number.isRequired,
-  vertical: bool.isRequired,
+  options: object.isRequired,
 };
 
 export default CarouselView;
