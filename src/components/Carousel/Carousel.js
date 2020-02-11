@@ -12,7 +12,7 @@ const Carousel = ({ initialSlide, children, options }) => {
   const [currentSlide, setCurrentSlide] = useState(initialSlide);
   const slideIndexes = Children.map(children, (child, index) => index);
 
-  const handleClick = slideIndex => {
+  const handleSlideChange = slideIndex => {
     /* Restart from end or beginning if index out of bounds */
     if (slideIndex > slideIndexes.length - 1) {
       if (options.loop) {
@@ -26,8 +26,8 @@ const Carousel = ({ initialSlide, children, options }) => {
     scrollTo(slideIndex);
   };
 
-  const nextSlide = () => handleClick(currentSlide + 1);
-  const prevSlide = () => handleClick(currentSlide - 1);
+  const nextSlide = () => handleSlideChange(currentSlide + 1);
+  const prevSlide = () => handleSlideChange(currentSlide - 1);
 
   const isLast = currentSlide === slideIndexes.length - 1 && !options.loop;
   const isFirst = currentSlide === 0 && !options.loop;
@@ -52,8 +52,9 @@ const Carousel = ({ initialSlide, children, options }) => {
   };
 
   useEffect(() => {
-    scrollTo(initialSlide);
-  }, [initialSlide, scrollTo]);
+    handleSlideChange(initialSlide);
+    /* eslint-disable react-hooks/exhaustive-deps */
+  }, [initialSlide]);
 
   return (
     <div
@@ -84,7 +85,7 @@ const Carousel = ({ initialSlide, children, options }) => {
       {options.dots ? (
         <CarouselDots
           currentSlide={currentSlide}
-          handleClick={handleClick}
+          handleClick={handleSlideChange}
           slideIndexes={slideIndexes}
           vertical={options.vertical}
         />
@@ -110,7 +111,7 @@ const Carousel = ({ initialSlide, children, options }) => {
 };
 
 Carousel.defaultProps = {
-  initialSlide: 1,
+  initialSlide: 0,
   options: {
     loop: false,
     slideGap: null,
