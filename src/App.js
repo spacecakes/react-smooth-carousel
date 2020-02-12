@@ -29,7 +29,9 @@ function App() {
 
   return (
     <main>
-      <section style={{ minHeight: 400, height: '40vw', maxHeight: 700 }}>
+      <section
+        style={{ minBlockSize: 400, blockSize: '40vw', maxBlockSize: 700 }}
+      >
         <Carousel
           controls={controls}
           initialSlide={initialSlide}
@@ -50,7 +52,7 @@ function App() {
         sx={{
           padding: 4,
           margin: 'auto',
-          maxWidth: 500,
+          maxInlineSize: 500,
           display: 'grid',
           gridGap: 3,
         }}
