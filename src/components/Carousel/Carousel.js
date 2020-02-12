@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { node, number, object } from 'prop-types';
-import { Children, Fragment, useCallback, useEffect, useState } from 'react';
+import { Children, useCallback, useEffect, useState } from 'react';
 import { jsx } from 'theme-ui';
 
 import CarouselButton from './CarouselButton';
@@ -8,7 +8,7 @@ import CarouselDots from './CarouselDots';
 import CarouselSlide from './CarouselSlide';
 import CarouselView from './CarouselView';
 
-const Carousel = ({ initialSlide, children, options }) => {
+const Carousel = ({ initialSlide, children, options, controls }) => {
   const [currentSlide, setCurrentSlide] = useState(initialSlide);
   const slideIndexes = Children.map(children, (child, index) => index);
 
@@ -82,48 +82,52 @@ const Carousel = ({ initialSlide, children, options }) => {
         ))}
       </CarouselView>
 
-      {options.dots ? (
-        <CarouselDots
-          currentSlide={currentSlide}
-          handleClick={handleSlideChange}
-          slideIndexes={slideIndexes}
-          vertical={options.vertical}
-        />
-      ) : null}
+      <CarouselDots
+        currentSlide={currentSlide}
+        handleClick={handleSlideChange}
+        options={options}
+        slideIndexes={slideIndexes}
+        visibility={controls.dots}
+      />
 
-      {options.arrows ? (
-        <Fragment>
-          <CarouselButton
-            disabled={isFirst}
-            handleClick={prevSlide}
-            prev
-            vertical={options.vertical}
-          />
-          <CarouselButton
-            disabled={isLast}
-            handleClick={nextSlide}
-            vertical={options.vertical}
-          />
-        </Fragment>
-      ) : null}
+      <CarouselButton
+        disabled={isFirst}
+        gridArea="prev"
+        handleClick={prevSlide}
+        orientation={options.vertical ? 'up' : 'left'}
+        visibility={controls.arrows}
+      />
+
+      <CarouselButton
+        disabled={isLast}
+        gridArea="next"
+        handleClick={nextSlide}
+        orientation={options.vertical ? 'down' : 'right'}
+        visibility={controls.arrows}
+      />
     </div>
   );
 };
 
 Carousel.defaultProps = {
+  controls: {
+    dots: 'both',
+    arrows: 'desktop',
+  },
   initialSlide: 0,
   options: {
     loop: false,
     slideGap: null,
     slidesVisible: 1,
     smooth: true,
-    dots: true,
-    arrows: true,
+    dotsOnTouch: true,
+    dotsOnDesktop: true,
   },
 };
 
 Carousel.propTypes = {
   children: node.isRequired,
+  controls: object,
   initialSlide: number,
   options: object,
 };
