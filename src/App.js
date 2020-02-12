@@ -21,8 +21,11 @@ function App() {
 
   const [initialSlide, setInitialSlide] = useState(0);
 
-  const changeOptions = e =>
-    setOptions({ ...options, [e.target.name]: !options[e.target.name] });
+  const changeOptions = e => {
+    const setting =
+      e.target.type === 'checkbox' ? !options[e.target.name] : e.target.value;
+    setOptions({ ...options, [e.target.name]: setting });
+  };
 
   const changeControls = e =>
     setControls({ ...controls, [e.target.name]: e.target.value });
@@ -105,8 +108,8 @@ function App() {
             />
           </label>
 
-          <label sx={{ display: 'flex' }}>
-            Start from
+          <label sx={{ display: 'flex', gridColumn: 'span 2' }}>
+            Start at index
             <input
               max={slides.length - 1}
               min="0"
@@ -114,6 +117,17 @@ function App() {
               sx={{ ml: 2 }}
               type="number"
               value={initialSlide}
+            />
+          </label>
+
+          <label sx={{ display: 'flex', gridColumn: 'span 2' }}>
+            Gap between slides
+            <input
+              name="slideGap"
+              onChange={changeOptions}
+              sx={{ ml: 2 }}
+              type="text"
+              value={options.slideGap}
             />
           </label>
 

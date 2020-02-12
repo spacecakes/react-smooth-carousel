@@ -22,8 +22,13 @@ Try it out [here](https://codesandbox.io/s/github/spacecakes/react-smooth-carous
 
 ## Props
 
-_Todo: list valid options here_
+Todo: list valid options here
 
 ## Usage
 
-Stick whatever element you like as children and `react-smooth-carousel` will render them. The carousel will always take up 100% of its containing element, so make sure to give it a `min-block-size`. For best results with images, size them to `100%` and set them to `object-fit: cover;`.
+Stick whatever element you like as children and `react-smooth-carousel` will render them. The carousel will always take up 100% of its containing element, so make sure to give the container a `min-block-size`. For best results with images, size them to `100%` and set them to `object-fit: cover;`.
+
+## Known bugs
+
+- Doesn't snap properly to start or end in Chrome.
+- Viewing more than one slide at once is currently not supported, but will be.
