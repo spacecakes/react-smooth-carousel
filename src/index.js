@@ -1,5 +1,4 @@
 import './index.css';
-import 'scroll-behavior-polyfill';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -16,6 +15,7 @@ async function polyfill() {
 }
 
 polyfill();
+
 ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
