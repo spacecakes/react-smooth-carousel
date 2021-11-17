@@ -18,6 +18,8 @@ Yes. This one aims to provide:
 
 Try it out [here](https://react-smooth-carousel.netlify.app).
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/c63a653a-6521-4e1c-b3da-36e741f40463/deploy-status)](https://app.netlify.com/sites/react-smooth-carousel/deploys)
+
 ## Props
 
 Todo: list valid options here
