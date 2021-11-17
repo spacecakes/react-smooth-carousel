@@ -4,8 +4,6 @@ Modern carousel based on CSS snapping points, Grid, Intersection
 Observer & `scrollIntoView()`. Fully responsive, and native scrolling behavior
 without hijacking.
 
-Doesn't work in IE
-
 ## Why
 
 Oh lord, another carousel?
@@ -18,7 +16,7 @@ Yes. This one aims to provide:
 
 ## Demo
 
-Try it out [here](https://codesandbox.io/s/github/spacecakes/react-smooth-carousel/tree/master/).
+Try it out [here](https://react-smooth-carousel.netlify.app).
 
 ## Props
 
@@ -28,7 +26,7 @@ Todo: list valid options here
 
 Stick whatever element you like as children and `react-smooth-carousel` will render them. The carousel will always take up 100% of its containing element, so make sure to give the container a `min-block-size`. For best results with images, size them to `100%` and set them to `object-fit: cover;`.
 
-## Known bugs
+## Known issues
 
-- Doesn't snap properly to start or end in Chrome.
-- Viewing more than one slide at once is currently not supported, but will be.
+- Doesn't snap properly to start or end in Chrome when `loop` is off
+- Viewing more than one slide at once is currently not supported
