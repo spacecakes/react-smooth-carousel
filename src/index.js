@@ -1,10 +1,22 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import * as serviceWorker from "./serviceWorker";
+import './index.css';
+import 'scroll-behavior-polyfill';
 
-ReactDOM.render(<App />, document.getElementById("root"));
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import App from './App';
+import * as serviceWorker from './serviceWorker';
+
+async function polyfill() {
+  // Polyfill smooth option for scrollIntoView for Safari
+
+  if (!('scrollBehavior' in document.documentElement.style)) {
+    await import('scroll-behavior-polyfill');
+  }
+}
+
+polyfill();
+ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
