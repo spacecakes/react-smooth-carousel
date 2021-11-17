@@ -1,4 +1,5 @@
 /** @jsx jsx */
+/** @jsxRuntime classic */
 import { node, number, object } from 'prop-types';
 import { Children, useCallback, useEffect, useState } from 'react';
 import { jsx } from 'theme-ui';
@@ -12,7 +13,7 @@ const Carousel = ({ initialSlide, children, options, controls }) => {
   const [currentSlide, setCurrentSlide] = useState(initialSlide);
   const slideIndexes = Children.map(children, (child, index) => index);
 
-  const handleSlideChange = slideIndex => {
+  const handleSlideChange = (slideIndex) => {
     /* Restart from end or beginning if index out of bounds */
     if (slideIndex > slideIndexes.length - 1) {
       if (options.loop) {
@@ -33,7 +34,7 @@ const Carousel = ({ initialSlide, children, options, controls }) => {
   const isFirst = currentSlide === 0 && !options.loop;
 
   const scrollTo = useCallback(
-    slideIndex => {
+    (slideIndex) => {
       const scrollOptions = {
         behavior: options.smooth ? 'smooth' : 'auto',
         block: 'center',
@@ -47,7 +48,7 @@ const Carousel = ({ initialSlide, children, options, controls }) => {
     [options.smooth]
   );
 
-  const updateUI = index => {
+  const updateUI = (index) => {
     setCurrentSlide(index);
   };
 
@@ -92,7 +93,7 @@ const Carousel = ({ initialSlide, children, options, controls }) => {
 
       <CarouselButton
         disabled={isFirst}
-        gridArea="prev"
+        gridArea='prev'
         handleClick={prevSlide}
         orientation={options.vertical ? 'up' : 'left'}
         visibility={controls.arrows}
@@ -100,7 +101,7 @@ const Carousel = ({ initialSlide, children, options, controls }) => {
 
       <CarouselButton
         disabled={isLast}
-        gridArea="next"
+        gridArea='next'
         handleClick={nextSlide}
         orientation={options.vertical ? 'down' : 'right'}
         visibility={controls.arrows}

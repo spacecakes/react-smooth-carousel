@@ -1,4 +1,5 @@
 /** @jsx jsx */
+/** @jsxRuntime classic */
 import { node, object } from 'prop-types';
 import { jsx } from 'theme-ui';
 
@@ -34,7 +35,7 @@ const CarouselView = ({ children, options }) => {
         '-webkit-overflow-scrolling': 'touch', // Needed to work on iOS Safari
         '::-webkit-scrollbar': { display: 'none' }, // Hide scrollbar on Chrome & Safari
       }}
-      tabIndex="0"
+      tabIndex='0'
     >
       {children}
     </div>

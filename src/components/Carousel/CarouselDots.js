@@ -1,4 +1,5 @@
 /** @jsx jsx */
+/** @jsxRuntime classic */
 import { array, func, number, object, string } from 'prop-types';
 import { jsx } from 'theme-ui';
 
@@ -26,7 +27,7 @@ const CarouselDots = ({
         },
       }}
     >
-      {slideIndexes.map(slide => {
+      {slideIndexes.map((slide) => {
         const disabled = slide === currentSlide;
         return (
           <button

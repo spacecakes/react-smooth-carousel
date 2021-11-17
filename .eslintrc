@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "react-app",
+    "prettier"
+  ],
+  "plugins": ["simple-import-sort"],
+  "rules": {
+    "react/no-array-index-key": "off",
+    "jsx-a11y/no-noninteractive-tabindex": "off",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error"
+  }
+}

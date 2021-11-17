@@ -1,4 +1,6 @@
 /** @jsx jsx */
+/** @jsxRuntime classic */
+
 import { useState } from 'react';
 import { jsx } from 'theme-ui';
 
@@ -21,13 +23,13 @@ function App() {
 
   const [initialSlide, setInitialSlide] = useState(0);
 
-  const changeOptions = e => {
+  const changeOptions = (e) => {
     const setting =
       e.target.type === 'checkbox' ? !options[e.target.name] : e.target.value;
     setOptions({ ...options, [e.target.name]: setting });
   };
 
-  const changeControls = e =>
+  const changeControls = (e) =>
     setControls({ ...controls, [e.target.name]: e.target.value });
 
   return (
@@ -40,7 +42,7 @@ function App() {
           initialSlide={initialSlide}
           options={options}
         >
-          {slides.map(slide => (
+          {slides.map((slide) => (
             <img
               alt={slide.alt}
               key={slide.src}
@@ -81,30 +83,30 @@ function App() {
             Vertical
             <input
               checked={options.vertical}
-              name="vertical"
+              name='vertical'
               onChange={changeOptions}
               sx={{ ml: 2 }}
-              type="checkbox"
+              type='checkbox'
             />
           </label>
           <label>
             Loop
             <input
               checked={options.loop}
-              name="loop"
+              name='loop'
               onChange={changeOptions}
               sx={{ ml: 2 }}
-              type="checkbox"
+              type='checkbox'
             />
           </label>
           <label>
             Smooth
             <input
               checked={options.smooth}
-              name="smooth"
+              name='smooth'
               onChange={changeOptions}
               sx={{ ml: 2 }}
-              type="checkbox"
+              type='checkbox'
             />
           </label>
 
@@ -112,10 +114,10 @@ function App() {
             Start at index
             <input
               max={slides.length - 1}
-              min="0"
-              onChange={e => setInitialSlide(e.currentTarget.value)}
+              min='0'
+              onChange={(e) => setInitialSlide(e.currentTarget.value)}
               sx={{ ml: 2 }}
-              type="number"
+              type='number'
               value={initialSlide}
             />
           </label>
@@ -123,10 +125,10 @@ function App() {
           <label sx={{ display: 'flex', gridColumn: 'span 2' }}>
             Gap between slides
             <input
-              name="slideGap"
+              name='slideGap'
               onChange={changeOptions}
               sx={{ ml: 2 }}
-              type="text"
+              type='text'
               value={options.slideGap}
             />
           </label>
@@ -139,33 +141,33 @@ function App() {
             Touch
             <input
               checked={controls.dots === 'touch'}
-              name="dots"
+              name='dots'
               onChange={changeControls}
               sx={{ ml: 2 }}
-              type="radio"
-              value="touch"
+              type='radio'
+              value='touch'
             />
           </label>
           <label>
             Desktop
             <input
               checked={controls.dots === 'desktop'}
-              name="dots"
+              name='dots'
               onChange={changeControls}
               sx={{ ml: 2 }}
-              type="radio"
-              value="desktop"
+              type='radio'
+              value='desktop'
             />
           </label>
           <label>
             Both
             <input
               checked={controls.dots === 'both'}
-              name="dots"
+              name='dots'
               onChange={changeControls}
               sx={{ ml: 2 }}
-              type="radio"
-              value="both"
+              type='radio'
+              value='both'
             />
           </label>
 
@@ -175,33 +177,33 @@ function App() {
             Touch
             <input
               checked={controls.arrows === 'touch'}
-              name="arrows"
+              name='arrows'
               onChange={changeControls}
               sx={{ ml: 2 }}
-              type="radio"
-              value="touch"
+              type='radio'
+              value='touch'
             />
           </label>
           <label>
             Desktop
             <input
               checked={controls.arrows === 'desktop'}
-              name="arrows"
+              name='arrows'
               onChange={changeControls}
               sx={{ ml: 2 }}
-              type="radio"
-              value="desktop"
+              type='radio'
+              value='desktop'
             />
           </label>
           <label>
             Both
             <input
               checked={controls.arrows === 'both'}
-              name="arrows"
+              name='arrows'
               onChange={changeControls}
               sx={{ ml: 2 }}
-              type="radio"
-              value="both"
+              type='radio'
+              value='both'
             />
           </label>
         </div>

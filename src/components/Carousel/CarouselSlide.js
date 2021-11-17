@@ -1,4 +1,5 @@
 /** @jsx jsx */
+/** @jsxRuntime classic */
 import { func, node, number } from 'prop-types';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
