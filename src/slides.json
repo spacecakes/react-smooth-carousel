@@ -1,32 +1,32 @@
 [
   {
-    "alt": "Monkey",
-    "src": "https://source.unsplash.com/featured/?monkey",
+    "alt": "Random photo",
+    "src": "https://picsum.photos/1920/1080",
     "id": 1
   },
   {
-    "alt": "Donkey",
-    "src": "https://source.unsplash.com/featured/?donkey",
+    "alt": "Random photo",
+    "src": "https://picsum.photos/1920/1080",
     "id": 2
   },
   {
-    "alt": "Dog",
-    "src": "https://source.unsplash.com/featured/?dog",
+    "alt": "Random photo",
+    "src": "https://picsum.photos/1920/1080",
     "id": 3
   },
   {
-    "alt": "Cow",
-    "src": "https://source.unsplash.com/featured/?cow",
+    "alt": "Random photo",
+    "src": "https://picsum.photos/1920/1080",
     "id": 4
   },
   {
-    "alt": "Duck",
-    "src": "https://source.unsplash.com/featured/?duck",
+    "alt": "Random photo",
+    "src": "https://picsum.photos/1920/1080",
     "id": 5
   },
   {
-    "alt": "Fox",
-    "src": "https://source.unsplash.com/featured/?camel",
+    "alt": "Random photo",
+    "src": "https://picsum.photos/1920/1080",
     "id": 6
   }
 ]
