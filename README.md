@@ -34,4 +34,5 @@ Stick whatever element you like as children and `react-smooth-carousel` will ren
 ## Known issues
 
 - Doesn't snap properly to start or end in Chrome when `loop` is off
+- Cursor dragging support is not yet implemented
 - Viewing more than one slide at once is currently not supported
