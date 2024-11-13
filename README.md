@@ -1,5 +1,8 @@
 # React Smooth Carousel
 
+> [!WARNING]
+> This library is no longer maintained and was unfortunately never finished. I'll leave it up because it still represents one of the best performing carousels I've used, but you will need to fork or copy the code to use it in your project.
+
 Modern carousel based on CSS snapping points, Grid, Intersection
 Observer & `scrollIntoView()`. Fully responsive, and native scrolling behavior
 without hijacking.
